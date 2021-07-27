@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <form [formGroup]="form" (ngSubmit)="buscarUsuario()">
+      <div class="form-group mb-3" >
+        <h1 for="usuariotxt" class="form-label text-center">Usuarios GitHub</h1>
+        <div class="busqueda-container">
+          <input type="text" class="form-control" formControlName="usuario" name="name" id="usuariotxt" placeholder="Buscar..." (keyup)="validarUsuario()"
+          [ngClass]="{'is-invalid':form.get('usuario')?.dirty&&form.invalid||!validUser}">
+          <div id="validationServerUsernameFeedback" class="invalid-feedback"> 
+            <app-error [mensaje]="mensajeError" *ngIf="!validarUsuario()"></app-error> 
+          </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-warning mt-3 " [disabled]="!validarEnvio()"><strong>Buscar usuario</strong></button>
+        </div>
+        </div>
+      </div>
+    </form>
+</div>
+<div class="container">
+    <table class="table table-striped table-hover table-responsive" data="10">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Usuario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listaUsuarios;let i=index">
+            <ng-container *ngIf="i<10">
+              <th scope="row">{{usuario.id}}</th>
+              <td class="d-flex user-container">
+                  <img width="30px" height="30px" [src]="usuario.avatar_url" alt="">
+                  <a [routerLink]="['/detalle',usuario.login]">{{usuario.login}}</a>
+              </td>
+            </ng-container>  
+        </tr>
+      </tbody>
+    </table>   
+    <div class="text-center" *ngIf="listaUsuarios.length===0"><h5>No hay usuarios con este nombre</h5></div>
+
+</div>
+
+<div class="container">
+  <div style="display: block">
+    <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+  </div>
+</div>

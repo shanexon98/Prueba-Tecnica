@@ -1,0 +1,9 @@
+.user-info-container{
+    box-shadow: 1px 1px 15px 3px rgba(0,0,0,0.58);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-info-container img{
+    border-radius: 50%;
+}
